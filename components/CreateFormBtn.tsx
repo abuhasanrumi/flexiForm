@@ -1,8 +1,11 @@
 'use client'
 
+import { CreateForm } from '@/actions/form'
 import { formSchema, formSchemaType } from '@/schemas/form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FilePlusIcon } from '@radix-ui/react-icons'
 import { LoaderCircleIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from "sonner"
 import { Button } from './ui/button'
@@ -10,10 +13,10 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
-import { CreateForm } from '@/actions/form'
-import { FilePlusIcon } from '@radix-ui/react-icons'
 
 const CreateFormBtn = () => {
+
+  const router = useRouter()
 
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
@@ -23,7 +26,7 @@ const CreateFormBtn = () => {
     try {
       const formId = await CreateForm(values)
       toast.success("Form created successfully")
-      console.log("formId", formId)
+      router.push(`/builder/${formId}`)
     } catch (error){
       toast.error("Something went wrong, please try again, ", error || "")
     }
