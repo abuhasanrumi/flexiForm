@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { CreateForm } from '@/actions/form'
+import { FilePlusIcon } from '@radix-ui/react-icons'
 
 const CreateFormBtn = () => {
 
@@ -24,14 +25,20 @@ const CreateFormBtn = () => {
       toast.success("Form created successfully")
       console.log("formId", formId)
     } catch (error){
-      toast.error("Something went wrong, please try again, ", error)
+      toast.error("Something went wrong, please try again, ", error || "")
     }
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create new form</Button>
+        <Button 
+          variant={"outline"}
+          className='group border border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4'
+        >
+          <FilePlusIcon className="h-8 w-8 text-muted-foreground group-hover:text-primary"/>
+          <p className="font-bold text-xl text-muted-foreground group-hover:text-primary">Create new form</p>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
