@@ -180,7 +180,7 @@ function FormCard({ form }: { form: Form }) {
           </Button>
         )}
         {!form.published && (
-          <Button asChild className="w-full text-md gap-4">
+          <Button asChild variant={'secondary'} className="w-full text-md gap-4">
             <Link href={`/builder/${form.id}`} className="flex items-center gap-2">
               <span>Edit Form</span>
               <Pencil2Icon />
