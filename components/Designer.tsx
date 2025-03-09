@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import DesignerSlide from './DesignerSlide'
+import DesignerSidebar from './DesignerSidebar'
 import { useDroppable } from '@dnd-kit/core'
 
 export default function Designer() {
@@ -20,7 +20,7 @@ export default function Designer() {
           </p>
         </div>
       </div>
-      <DesignerSlide />
+      <DesignerSidebar />
     </div>
   )
 }
