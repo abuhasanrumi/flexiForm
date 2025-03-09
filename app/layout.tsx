@@ -3,6 +3,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import DesignerContextProvider from "@/components/context/DesignerContext";
 
 export const metadata: Metadata = {
   title: "FlexiForm",
@@ -18,15 +19,17 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <ClerkProvider afterSignOutUrl="/sign-in">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Toaster />
-          </ThemeProvider>
+          <DesignerContextProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </DesignerContextProvider>
         </ClerkProvider>
       </body>
     </html>
