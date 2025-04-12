@@ -1,22 +1,23 @@
 'use client'
 
-import React, { useState } from 'react'
-import DesignerSidebar from './DesignerSidebar'
+import { idGenerator } from '@/lib/idGenerator'
+import { cn } from '@/lib/utils'
 import {
   DragEndEvent,
   useDndMonitor,
   useDraggable,
   useDroppable
 } from '@dnd-kit/core'
-import { cn } from '@/lib/utils'
-import useDesigner from './hooks/useDesigner'
-import { ElementsType, FormElementInstance, FormElements } from './FormElements'
-import { idGenerator } from '@/lib/idGenerator'
-import { Button } from './ui/button'
+import { useState } from 'react'
 import { BiSolidTrash } from 'react-icons/bi'
+import DesignerSidebar from './DesignerSidebar'
+import { ElementsType, FormElementInstance, FormElements } from './FormElements'
+import useDesigner from './hooks/useDesigner'
+import { Button } from './ui/button'
 
 export default function Designer() {
-  const { elements, addElement } = useDesigner()
+  const { elements, addElement, selectedElement, setSelectedElement } =
+    useDesigner()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -45,7 +46,13 @@ export default function Designer() {
   })
   return (
     <div className='flex w-full h-full'>
-      <div className='p-4 w-full'>
+      <div
+        className='p-4 w-full'
+        onClick={() => {
+          if (selectedElement) {
+            setSelectedElement(null)
+          }
+        }}>
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -80,7 +87,7 @@ export function DesignerElementWrapper({
 }: {
   element: FormElementInstance
 }) {
-  const { removeElement } = useDesigner()
+  const { removeElement, selectedElement, setSelectedElement } = useDesigner()
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false)
   const topHalf = useDroppable({
     id: element.id + '-top',
@@ -118,7 +125,11 @@ export function DesignerElementWrapper({
       {...draggable.attributes}
       className='relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset'
       onMouseEnter={() => setMouseIsOver(true)}
-      onMouseLeave={() => setMouseIsOver(false)}>
+      onMouseLeave={() => setMouseIsOver(false)}
+      onClick={(e) => {
+        e.stopPropagation()
+        setSelectedElement(element)
+      }}>
       <div
         ref={topHalf.setNodeRef}
         className='absolute w-full h-1/2 rounded-t-md'
@@ -133,7 +144,10 @@ export function DesignerElementWrapper({
             <Button
               className='flex justify-center h-full border rounded-md rounded-l-none bg-red-500'
               variant={'outline'}
-              onClick={() => removeElement(element.id)}>
+              onClick={(e) => {
+                e.stopPropagation()
+                removeElement(element.id)
+              }}>
               <BiSolidTrash />
             </Button>
           </div>
@@ -145,17 +159,17 @@ export function DesignerElementWrapper({
         </>
       )}
       {topHalf.isOver && (
-        <div className="absolute top-0 w-full rounded-md h-[7px] bg-primary rounded-b-none" />
+        <div className='absolute top-0 w-full rounded-md h-[7px] bg-primary rounded-b-none' />
       )}
       <div
         className={cn(
           'flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100',
-          mouseIsOver && 'opacity-30',
+          mouseIsOver && 'opacity-30'
         )}>
         <DesignerElement elementInstance={element} />
       </div>
       {bottomHalf.isOver && (
-        <div className="absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none" />
+        <div className='absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none' />
       )}
     </div>
   )
