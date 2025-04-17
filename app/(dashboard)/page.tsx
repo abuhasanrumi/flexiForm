@@ -1,15 +1,31 @@
-import { GetForms, GetFormStats } from "@/actions/form";
-import CreateFormBtn from "@/components/CreateFormBtn";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Form } from "@prisma/client";
-import { ArrowRightIcon, CheckCircledIcon, CrossCircledIcon, Crosshair2Icon, EyeOpenIcon, FilePlusIcon, Pencil2Icon, PersonIcon } from "@radix-ui/react-icons";
-import { formatDistance } from 'date-fns';
-import Link from "next/link";
-import { ReactNode, Suspense } from "react";
+import { GetForms, GetFormStats } from '@/actions/form'
+import CreateFormBtn from '@/components/CreateFormBtn'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Form } from '@prisma/client'
+import {
+  ArrowRightIcon,
+  CheckCircledIcon,
+  CrossCircledIcon,
+  Crosshair2Icon,
+  EyeOpenIcon,
+  FilePlusIcon,
+  Pencil2Icon,
+  PersonIcon
+} from '@radix-ui/react-icons'
+import { formatDistance } from 'date-fns'
+import Link from 'next/link'
+import { ReactNode, Suspense } from 'react'
 
 export default function Home() {
   return (
@@ -45,51 +61,51 @@ interface StatsCardProps {
   loading: boolean
 }
 
-function StatsCards(props: StatsCardProps){
-  const {data, loading} = props
+function StatsCards(props: StatsCardProps) {
+  const { data, loading } = props
 
   return (
-    <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <div className='w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
       <StatsCard
-        title="Total visits"
-        icon={<PersonIcon className="text-blue-600"/>}
-        helperText="All time form visits"
-        value={data?.visits?.toLocaleString() || ""}
+        title='Total visits'
+        icon={<PersonIcon className='text-blue-600' />}
+        helperText='All time form visits'
+        value={data?.visits?.toLocaleString() || ''}
         loading={loading}
-        className="shadow-md shadow-blue-600"
+        className='shadow-md shadow-blue-600'
       />
 
       <StatsCard
-        title="Total submissions"
-        icon={<Crosshair2Icon className="text-yellow-600"/>}
-        helperText="All time form submissions"
-        value={data?.submissions?.toLocaleString() || ""}
+        title='Total submissions'
+        icon={<Crosshair2Icon className='text-yellow-600' />}
+        helperText='All time form submissions'
+        value={data?.submissions?.toLocaleString() || ''}
         loading={loading}
-        className="shadow-md shadow-yellow-600"
+        className='shadow-md shadow-yellow-600'
       />
 
       <StatsCard
-        title="Submission rate"
-        icon={<CheckCircledIcon className="text-blue-600"/>}
-        helperText="Visits that result in form submission"
-        value={data?.submissionRate?.toLocaleString() + "%" || ""}
+        title='Submission rate'
+        icon={<CheckCircledIcon className='text-blue-600' />}
+        helperText='Visits that result in form submission'
+        value={data?.submissionRate?.toLocaleString() + '%' || ''}
         loading={loading}
-        className="shadow-md shadow-blue-600"
+        className='shadow-md shadow-blue-600'
       />
 
       <StatsCard
-        title="Bounce rate"
-        icon={<CrossCircledIcon className="text-red-600"/>}
-        helperText="Visits that leave without interaction"
-        value={data?.bounceRate?.toLocaleString() + "%" || ""}
+        title='Bounce rate'
+        icon={<CrossCircledIcon className='text-red-600' />}
+        helperText='Visits that leave without interaction'
+        value={data?.bounceRate?.toLocaleString() + '%' || ''}
         loading={loading}
-        className="shadow-md shadow-red-600"
+        className='shadow-md shadow-red-600'
       />
     </div>
   )
 }
 
-function StatsCard({
+export function StatsCard({
   title,
   value,
   icon,
@@ -128,18 +144,16 @@ function StatsCard({
 }
 
 function FormCardSkeleton() {
-  return <Skeleton className="border-2 border-primary-/20 h-[190px] w-full" />
+  return <Skeleton className='border-2 border-primary-/20 h-[190px] w-full' />
 }
 
-async function FormCards(){
+async function FormCards() {
   const forms = await GetForms()
   return (
     <>
-      {
-        forms.map((form) => (
-          <FormCard key={form.id} form={form} />
-        ))
-      }
+      {forms.map((form) => (
+        <FormCard key={form.id} form={form} />
+      ))}
     </>
   )
 }
@@ -172,16 +186,23 @@ function FormCard({ form }: { form: Form }) {
       </CardContent>
       <CardFooter>
         {form.published && (
-          <Button asChild className="w-full text-md gap-4">
-            <Link href={`/forms/${form.id}`} className="flex items-center gap-2">
+          <Button asChild className='w-full text-md gap-4'>
+            <Link
+              href={`/forms/${form.id}`}
+              className='flex items-center gap-2'>
               <span>View submissions</span>
               <ArrowRightIcon />
             </Link>
           </Button>
         )}
         {!form.published && (
-          <Button asChild variant={'secondary'} className="w-full text-md gap-4">
-            <Link href={`/builder/${form.id}`} className="flex items-center gap-2">
+          <Button
+            asChild
+            variant={'secondary'}
+            className='w-full text-md gap-4'>
+            <Link
+              href={`/builder/${form.id}`}
+              className='flex items-center gap-2'>
               <span>Edit Form</span>
               <Pencil2Icon />
             </Link>
