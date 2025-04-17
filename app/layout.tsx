@@ -1,31 +1,32 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Toaster } from "@/components/ui/sonner";
-import DesignerContextProvider from "@/components/context/DesignerContext";
+import DesignerContextProvider from '@/components/context/DesignerContext'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { Toaster } from '@/components/ui/sonner'
+import { ClerkProvider } from '@clerk/nextjs'
+import type { Metadata } from 'next'
+import NextTopLoader from 'nextjs-toploader'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "FlexiForm",
-  description: "A drag and drop form builder app",
-};
+  title: 'FlexiForm',
+  description: 'A drag and drop form builder app'
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        <ClerkProvider afterSignOutUrl="/sign-in">
+    <html lang='en'>
+      <body className='antialiased'>
+        <ClerkProvider afterSignOutUrl='/sign-in'>
+          <NextTopLoader />
           <DesignerContextProvider>
             <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
+              attribute='class'
+              defaultTheme='system'
               enableSystem
-              disableTransitionOnChange
-            >
+              disableTransitionOnChange>
               {children}
               <Toaster />
             </ThemeProvider>
@@ -33,6 +34,5 @@ export default function RootLayout({
         </ClerkProvider>
       </body>
     </html>
-  );
+  )
 }
-
