@@ -126,7 +126,7 @@ function FormComponent({
         className={cn(error && 'border-red-500')}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
-        onBlurCapture={(e) => {
+        onBlur={(e) => {
           if (!submitValue) return
           const valid = TextFieldFormElement.validate(element, e.target.value)
           setError(!valid)
