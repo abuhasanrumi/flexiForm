@@ -16,8 +16,11 @@ import {
   Crosshair2Icon,
   PersonIcon
 } from '@radix-ui/react-icons'
-import { formatDistance } from 'date-fns'
+import { format, formatDistance } from 'date-fns'
 import { StatsCard } from '../../page'
+import { ReactNode } from 'react'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 
 async function FormDetailsPage({
   params
@@ -127,6 +130,12 @@ async function SubmissionTable({ id }: { id: number }) {
   formElements.forEach((element) => {
     switch (element.type) {
       case 'TextField':
+      case 'NumberField':
+      case 'TextareaField':
+      case 'CheckboxField':
+      case 'DateField':
+      case 'SelectField':
+      case 'ParagraphField':
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -191,6 +200,21 @@ async function SubmissionTable({ id }: { id: number }) {
 }
 
 function RowCell({ type, value }: { type: ElementsType; value: string }) {
-  const node: ReactNode = value
+  let node: ReactNode = value
+  switch (type) {
+    case 'DateField':
+      if (!value) break
+      const date = new Date(value)
+      node = <Badge variant={'outline'}>{format(date, 'dd/mm/yyyy')}</Badge>
+      break
+
+    case 'CheckboxField':
+      const checked = value === 'true'
+      node = <Checkbox checked={checked} disabled />
+      break;
+
+    default:
+      break
+  }
   return <TableCell>{node}</TableCell>
 }
