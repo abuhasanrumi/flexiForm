@@ -16,8 +16,7 @@ import useDesigner from './hooks/useDesigner'
 import { Button } from './ui/button'
 
 export default function Designer() {
-  const { elements, addElement, setSelectedElement, removeElement } =
-    useDesigner()
+  const { elements, addElement, removeElement } = useDesigner()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -155,7 +154,7 @@ export function DesignerElementWrapper({
 }: {
   element: FormElementInstance
 }) {
-  const { removeElement, selectedElement, setSelectedElement } = useDesigner()
+  const { removeElement, setSelectedElement } = useDesigner()
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false)
   const topHalf = useDroppable({
     id: element.id + '-top',

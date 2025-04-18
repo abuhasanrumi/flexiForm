@@ -92,7 +92,7 @@ function DesignerComponent({
         {label}
         {required && '*'}
       </Label>
-      <Textarea readOnly disabled placeholder={placeholder} />
+      <Textarea readOnly disabled placeholder={placeholder} rows={rows} />
       {helperText && (
         <p className='text-muted-foreground text-[0.8rem]'>{helperText}</p>
       )}
@@ -120,15 +120,16 @@ function FormComponent({
     setError(true)
   }, [isInvalid])
 
-  const { label, required, placeholder, helperText, rows } = element.extraAttributes
+  const { label, required, placeholder, helperText, rows } =
+    element.extraAttributes
   return (
     <div className='flex flex-col gap-2 w-full'>
       <Label className={cn(error && 'text-red-500')}>
         {label}
         {required && '*'}
       </Label>
-      <Textarea 
-      rows={rows}
+      <Textarea
+        rows={rows}
         className={cn(error && 'border-red-500')}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
@@ -302,13 +303,18 @@ function PropertiesComponent({
           name='rows'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Rows: {form.watch("rows")}</FormLabel>
+              <FormLabel>Rows: {form.watch('rows')}</FormLabel>
               <FormControl>
-                <Slider defaultValue={[field.value]}
-                min={1} max={10} step={1} onValueChange={(value) => {
-                  field.onChange(value[0])
-                }} />
-              </FormControl> 
+                <Slider
+                  defaultValue={[field.value]}
+                  min={1}
+                  max={10}
+                  step={1}
+                  onValueChange={(value) => {
+                    field.onChange(value[0])
+                  }}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
