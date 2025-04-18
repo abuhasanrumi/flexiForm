@@ -16,13 +16,8 @@ import useDesigner from './hooks/useDesigner'
 import { Button } from './ui/button'
 
 export default function Designer() {
-  const {
-    elements,
-    addElement,
-    selectedElement,
-    setSelectedElement,
-    removeElement
-  } = useDesigner()
+  const { elements, addElement, setSelectedElement, removeElement } =
+    useDesigner()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',

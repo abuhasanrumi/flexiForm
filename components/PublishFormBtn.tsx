@@ -25,7 +25,7 @@ export default function PublishFormBtn({ id }: { id: number }) {
       await PublishForm(id)
       toast.success('Form published successfully')
       router.refresh()
-    } catch (error) {
+    } catch {
       toast.error('Something went wrong')
     }
   }
