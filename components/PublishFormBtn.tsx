@@ -1,7 +1,6 @@
 import { PublishForm } from '@/actions/form'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
-import { ImSpinner2 } from 'react-icons/im'
 import { MdOutlinePublish } from 'react-icons/md'
 import { toast } from 'sonner'
 import {
@@ -16,6 +15,7 @@ import {
   AlertDialogTrigger
 } from './ui/alert-dialog'
 import { Button } from './ui/button'
+import { FaSpinner } from 'react-icons/fa'
 
 export default function PublishFormBtn({ id }: { id: number }) {
   const [loading, startTransition] = useTransition()
@@ -26,7 +26,7 @@ export default function PublishFormBtn({ id }: { id: number }) {
       toast.success('Form published successfully')
       router.refresh()
     } catch (error) {
-      toast.error('Something went wrong', error)
+      toast.error('Something went wrong')
     }
   }
   return (
@@ -57,7 +57,7 @@ export default function PublishFormBtn({ id }: { id: number }) {
               e.preventDefault()
               startTransition(publishForm)
             }}>
-            Proceed {loading && <ImSpinner2 className='animate-spin' />}
+            Proceed {loading && <FaSpinner className='animate-spin' />}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
