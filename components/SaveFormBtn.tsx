@@ -15,8 +15,8 @@ export default function SaveFormBtn({ id }: { id: number }) {
       const JSONElements = JSON.stringify(elements)
       await UpdateFormContent(id, JSONElements)
       toast.success('Form saved successfully')
-    } catch (error) {
-      toast.error('Something went wrong', error)
+    } catch {
+      toast.error('Something went wrong')
     }
   }
   return (

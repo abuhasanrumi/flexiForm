@@ -54,8 +54,8 @@ function FormSubmitComponent({
       const jsonContent = JSON.stringify(formValues.current)
       await SubmitForm(formUrl, jsonContent)
       setSubmitted(true)
-    } catch (error) {
-      toast.error('Something went wrong', error)
+    } catch {
+      toast.error('Something went wrong')
     }
 
     console.log('form vales', formValues.current)

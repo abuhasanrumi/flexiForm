@@ -110,7 +110,7 @@ function FormComponent({
   defaultValue
 }: {
   elementInstance: FormElementInstance
-  submitValue: SubmitFunction
+  submitValue?: SubmitFunction
   isInvalid?: boolean
   defaultValue?: string
 }) {

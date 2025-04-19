@@ -25,7 +25,13 @@ import {
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Switch } from '../ui/switch'
-import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '../ui/select'
 import { Separator } from '../ui/separator'
 import { Button } from '../ui/button'
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai'
@@ -46,7 +52,7 @@ const propertiesSchema = z.object({
   helperText: z.string().max(200),
   required: z.boolean().default(false),
   placeholder: z.string().max(50),
-  options: z.array(z.string().default([]))
+  options: z.array(z.string()).default([])
 })
 
 export const SelectFieldFormElement: FormElement = {
@@ -113,7 +119,7 @@ function FormComponent({
   defaultValue
 }: {
   elementInstance: FormElementInstance
-  submitValue: SubmitFunction
+  submitValue?: SubmitFunction
   isInvalid?: boolean
   defaultValue?: string
 }) {
@@ -148,9 +154,9 @@ function FormComponent({
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
-            <SelectValue key={option} value={option}>
+            <SelectItem key={option} value={option}>
               {option}
-            </SelectValue>
+            </SelectItem>
           ))}
         </SelectContent>
       </Select>

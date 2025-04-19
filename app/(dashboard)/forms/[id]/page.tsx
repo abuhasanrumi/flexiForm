@@ -138,10 +138,17 @@ async function SubmissionTable({ id }: { id: number }) {
       case 'ParagraphField':
         columns.push({
           id: element.id,
-          label: element.extraAttributes?.label,
-          required: element.extraAttributes?.required,
+          label:
+            typeof element.extraAttributes?.label === 'string'
+              ? element.extraAttributes.label
+              : '',
+          required:
+            typeof element.extraAttributes?.required === 'boolean'
+              ? element.extraAttributes.required
+              : false,
           type: element.type
         })
+
         break
       default:
         break
@@ -211,7 +218,7 @@ function RowCell({ type, value }: { type: ElementsType; value: string }) {
     case 'CheckboxField':
       const checked = value === 'true'
       node = <Checkbox checked={checked} disabled />
-      break;
+      break
 
     default:
       break
