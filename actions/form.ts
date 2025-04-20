@@ -3,6 +3,7 @@
 import { prisma } from '@/lib/prisma'
 import { formSchema, formSchemaType } from '@/schemas/form'
 import { currentUser } from '@clerk/nextjs/server'
+import { revalidatePath } from 'next/cache'
 
 class UserNotFoundError extends Error {}
 
@@ -187,4 +188,36 @@ export async function getFormWithSubmissions(id: number) {
       FormSubmissions: true
     }
   })
+}
+
+export async function deleteForm(id: number) {
+  const user = await currentUser()
+  if (!user) {
+    throw new UserNotFoundError()
+  }
+
+  const form = await prisma.form.findUnique({
+    where: {
+      id,
+      userId: user.id
+    }
+  })
+
+  if (!form) {
+    throw new Error('Form not found')
+  }
+
+  if (form.published) {
+    throw new Error('Cannot delete published forms')
+  }
+
+  await prisma.form.delete({
+    where: {
+      id,
+      userId: user.id
+    }
+  })
+
+  revalidatePath('/forms')
+  return { message: 'Form deleted successfully' }
 }

@@ -3,7 +3,6 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Toaster } from '@/components/ui/sonner'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
-import NextTopLoader from 'nextjs-toploader'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang='en'>
       <body className='antialiased'>
         <ClerkProvider afterSignOutUrl='/sign-in'>
-          <NextTopLoader />
           <DesignerContextProvider>
             <ThemeProvider
               attribute='class'
