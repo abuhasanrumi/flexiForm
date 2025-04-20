@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { MdOutlinePublish } from 'react-icons/md'
 import { toast } from 'sonner'
+import useDesigner from './hooks/useDesigner'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,12 +16,18 @@ import {
   AlertDialogTrigger
 } from './ui/alert-dialog'
 import { Button } from './ui/button'
-import { FaSpinner } from 'react-icons/fa'
+import { ImSpinner2 } from 'react-icons/im'
 
 export default function PublishFormBtn({ id }: { id: number }) {
   const [loading, startTransition] = useTransition()
   const router = useRouter()
+  const { elements } = useDesigner()
+
   async function publishForm() {
+    if (elements.length === 0) {
+      toast.error('Please add at least one element before publishing')
+      return
+    }
     try {
       await PublishForm(id)
       toast.success('Form published successfully')
@@ -57,7 +64,7 @@ export default function PublishFormBtn({ id }: { id: number }) {
               e.preventDefault()
               startTransition(publishForm)
             }}>
-            Proceed {loading && <FaSpinner className='animate-spin' />}
+            Proceed {loading && <ImSpinner2 className='animate-spin' />}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
