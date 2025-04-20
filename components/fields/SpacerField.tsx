@@ -61,7 +61,7 @@ function DesignerComponent({
   return (
     <div className='flex flex-col gap-2 w-full items-center'>
       <Label className='text-muted-foreground'>Spacer Field: {height}px</Label>
-      <LucideSeparatorHorizontal className='h-8 w-8' />
+      <LucideSeparatorHorizontal className='h-8 w-8 text-slate-500 dark:text-slate-500' />
     </div>
   )
 }
