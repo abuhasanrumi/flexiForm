@@ -51,7 +51,7 @@ const CreateFormBtn = () => {
       <DialogTrigger asChild>
         <Button
           variant='outline'
-          className='group h-full w-full items-center justify-center flex flex-col border border-border hover:border-primary hover:shadow-md border-dashed gap-4 bg-background hover:bg-muted transition-colors'>
+          className='group w-full flex flex-col items-center justify-center border border-border hover:border-primary hover:shadow-md border-dashed gap-4 bg-background hover:bg-muted transition-colors min-h-[200px] h-full'>
           <FilePlusIcon className='h-16 w-16 text-muted-foreground group-hover:text-primary transition-colors' />
           <p className='font-bold text-xl text-muted-foreground group-hover:text-primary transition-colors'>
             Create new form

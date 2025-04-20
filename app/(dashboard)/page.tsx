@@ -55,7 +55,7 @@ export default function Home() {
         <CreateFormBtn />
 
         <Suspense
-          fallback={[1, 2, 3, 4].map((el) => (
+          fallback={[1, 2].map((el) => (
             <FormCardSkeleton key={el} />
           ))}>
           <FormCards />
