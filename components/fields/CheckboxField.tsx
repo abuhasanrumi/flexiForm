@@ -82,16 +82,19 @@ function DesignerComponent({
   const { label, required, helperText } = element.extraAttributes
   const id = `checkbox-${element.id}`
   return (
-    <div className='flex items-top space-x-2'>
-      <Checkbox id={id} />
-      <div className='grid gap-1 5 leading-none'>
-        <Label htmlFor={id}>
-          {label}
-          {required && '*'}
-        </Label>
-        {helperText && (
-          <p className='text-muted-foreground text-[0.8rem]'>{helperText}</p>
-        )}
+    <div className='flex flex-col gap-2 w-full shadow-sm'>
+      <div className='flex items-start space-x-3'>
+        <Checkbox
+          id={id}
+          className='mt-1 border-zinc-300 data-[state=checked]:bg-[#673ab7] data-[state=checked]:border-[#673ab7]'
+        />
+        <div className='grid gap-1.5 leading-none'>
+          <Label htmlFor={id} className='text-base font-medium text-[#202124]'>
+            {label}
+            {required && <span className='text-[#d93025] ml-1'>*</span>}
+          </Label>
+          {helperText && <p className='text-[#5f6368] text-sm'>{helperText}</p>}
+        </div>
       </div>
     </div>
   )
@@ -122,36 +125,49 @@ function FormComponent({
   const { label, required, helperText } = element.extraAttributes
   const id = `checkbox-${element.id}`
   return (
-    <div className='flex items-top space-x-2'>
-      <Checkbox
-        id={id}
-        checked={value}
-        className={cn(error && 'border-red-500')}
-        onCheckedChange={(checked) => {
-          let value = false
-          if (checked == true) value = true
-          setValue(value)
-          if (!submitValue) return
-          const stringValue = value ? 'true' : 'false'
-          const valid = CheckboxFieldFormElement.validate(element, stringValue)
-          setError(!valid)
-          submitValue(element.id, stringValue)
-        }}
-      />
-      <div className='grid gap-1 5 leading-none'>
-        <Label htmlFor={id} className={cn(error && 'text-red-500')}>
-          {label}
-          {required && '*'}
-        </Label>
-        {helperText && (
-          <p
+    <div className='flex flex-col gap-2 w-full shadow-sm hover:shadow-md transition-shadow'>
+      <div className='flex items-start space-x-3'>
+        <Checkbox
+          id={id}
+          checked={value}
+          className={cn(
+            'mt-1 border-zinc-300 data-[state=checked]:bg-[#673ab7] data-[state=checked]:border-[#673ab7]',
+            error && 'border-[#d93025]'
+          )}
+          onCheckedChange={(checked) => {
+            let value = false
+            if (checked == true) value = true
+            setValue(value)
+            if (!submitValue) return
+            const stringValue = value ? 'true' : 'false'
+            const valid = CheckboxFieldFormElement.validate(
+              element,
+              stringValue
+            )
+            setError(!valid)
+            submitValue(element.id, stringValue)
+          }}
+        />
+        <div className='grid gap-1.5 leading-none'>
+          <Label
+            htmlFor={id}
             className={cn(
-              'text-muted-foreground text-[0.8rem]',
-              error && 'text-red-500'
+              'text-base font-medium text-[#202124]',
+              error && 'text-[#d93025]'
             )}>
-            {helperText}
-          </p>
-        )}
+            {label}
+            {required && <span className='text-[#d93025] ml-1'>*</span>}
+          </Label>
+          {helperText && (
+            <p
+              className={cn(
+                'text-sm text-[#5f6368]',
+                error && 'text-[#d93025]'
+              )}>
+              {helperText}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   )
