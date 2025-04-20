@@ -7,51 +7,70 @@ import { FilePlusIcon } from '@radix-ui/react-icons'
 import { LoaderCircleIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { toast } from "sonner"
+import { toast } from 'sonner'
 import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from './ui/dialog'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from './ui/form'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 
 const CreateFormBtn = () => {
-
   const router = useRouter()
 
   const form = useForm<formSchemaType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema)
   })
 
-  async function onSubmit(values: formSchemaType){
+  async function onSubmit(values: formSchemaType) {
     try {
       const formId = await CreateForm(values)
-      toast.success("Form created successfully")
+      toast.success('Form created successfully')
       router.push(`/builder/${formId}`)
-    } catch (error){
-      toast.error("Something went wrong, please try again, ", error || "")
+    } catch {
+      toast.error('Something went wrong, please try again.')
     }
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button 
-          variant={"outline"}
-          className='group border border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4'
-        >
-          <FilePlusIcon className="h-8 w-8 text-muted-foreground group-hover:text-primary"/>
-          <p className="font-bold text-xl text-muted-foreground group-hover:text-primary">Create new form</p>
+        <Button
+          variant='outline'
+          className='group h-full w-full items-center justify-center flex flex-col border border-border hover:border-primary hover:shadow-md border-dashed gap-4 bg-background hover:bg-muted transition-colors'>
+          <FilePlusIcon className='h-16 w-16 text-muted-foreground group-hover:text-primary transition-colors' />
+          <p className='font-bold text-xl text-muted-foreground group-hover:text-primary transition-colors'>
+            Create new form
+          </p>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+
+      <DialogContent className='bg-background text-foreground'>
         <DialogHeader>
           <DialogTitle>Create form</DialogTitle>
           <DialogDescription>
             Create a new form to start collecting responses
           </DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='space-y-4 pt-2'>
             <FormField
               control={form.control}
               name='name'
@@ -59,7 +78,10 @@ const CreateFormBtn = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input
+                      {...field}
+                      className='bg-background border-border focus-visible:ring-primary'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -73,24 +95,30 @@ const CreateFormBtn = () => {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea rows={5} {...field} />
+                    <Textarea
+                      rows={5}
+                      {...field}
+                      className='bg-background border-border focus-visible:ring-primary'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            /> 
+            />
+
+            <DialogFooter>
+              <Button
+                type='submit'
+                disabled={form.formState.isSubmitting}
+                className='w-full mt-2'>
+                {!form.formState.isSubmitting && <span>Save</span>}
+                {form.formState.isSubmitting && (
+                  <LoaderCircleIcon className='animate-spin w-4 h-4' />
+                )}
+              </Button>
+            </DialogFooter>
           </form>
         </Form>
-        <DialogFooter>
-          <Button 
-            onClick={form.handleSubmit(onSubmit)}
-            disabled={form.formState.isSubmitting} 
-            className='w-full mt-4'
-          >
-            {!form.formState.isSubmitting && <span>Save</span>}
-            {form.formState.isSubmitting && <LoaderCircleIcon className='animate-spin'/>}
-          </Button> 
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
