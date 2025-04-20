@@ -60,8 +60,8 @@ function DesignerComponent({
   const { text } = element.extraAttributes
   return (
     <div className='flex flex-col gap-2 w-full'>
-      <Label className='text-muted-foreground'>Paragraph Field</Label>
-      <p>{text}</p>
+      <Label className='text-zinc-500 font-normal'>Paragraph Field</Label>
+      <p className='font-normal text-zinc-800'>{text}</p>
     </div>
   )
 }
