@@ -1,10 +1,10 @@
 import { UpdateFormContent } from '@/actions/form'
 import { useTransition } from 'react'
-import { FaSpinner } from 'react-icons/fa'
 import { HiSaveAs } from 'react-icons/hi'
 import { toast } from 'sonner'
 import useDesigner from './hooks/useDesigner'
 import { Button } from './ui/button'
+import { ImSpinner2 } from 'react-icons/im'
 
 export default function SaveFormBtn({ id }: { id: number }) {
   const { elements } = useDesigner()
@@ -29,7 +29,7 @@ export default function SaveFormBtn({ id }: { id: number }) {
       }}>
       <HiSaveAs className='h-4 w-4' />
       Save
-      {loading && <FaSpinner className='animate-spin' />}
+      {loading && <ImSpinner2 className='animate-spin' />}
     </Button>
   )
 }
