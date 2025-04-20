@@ -60,8 +60,8 @@ function DesignerComponent({
   const { title } = element.extraAttributes
   return (
     <div className='flex flex-col gap-2 w-full'>
-      <Label className='text-muted-foreground'>Subtitle Field</Label>
-      <p className='text-lg'>{title}</p>
+      <Label className='text-zinc-500 font-normal'>Subtitle Field</Label>
+      <p className='text-lg font-normal text-zinc-800'>{title}</p>
     </div>
   )
 }
