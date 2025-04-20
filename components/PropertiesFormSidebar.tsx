@@ -12,15 +12,15 @@ function PropertiesFormSidebar() {
   const PropertiesForm = FormElements[selectedElement?.type].propertiesComponent
 
   return (
-    <div className='flex flex-col p-2'>
+    <div className='flex flex-col bg-white dark:bg-zinc-900 h-full'>
       <div className='flex justify-between items-center'>
-        <p className='text-sm text-foreground/70'>Element Properties</p>
+        <h4 className='text-lg text-zinc-800 dark:text-zinc-100'>
+          Element Properties
+        </h4>
         <Button
-          size={'icon'}
-          variant={'ghost'}
-          onClick={() => {
-            setSelectedElement(null)
-          }}>
+          size='icon'
+          variant='ghost'
+          onClick={() => setSelectedElement(null)}>
           <AiOutlineClose />
         </Button>
       </div>
