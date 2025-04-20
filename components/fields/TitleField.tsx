@@ -60,8 +60,8 @@ function DesignerComponent({
   const { title } = element.extraAttributes
   return (
     <div className='flex flex-col gap-2 w-full'>
-      <Label className='text-muted-foreground'>Title Field</Label>
-      <p className='text-xl'>{title}</p>
+      <Label className='text-zinc-500 font-normal'>Title Field</Label>
+      <p className='text-2xl font-normal text-zinc-800'>{title}</p>
     </div>
   )
 }
@@ -74,7 +74,7 @@ function FormComponent({
   const element = elementInstance as CustomInstance
 
   const { title } = element.extraAttributes
-  return <p className='text-xl'>{title}</p>
+  return <p className='text-2xl font-normal text-zinc-800'>{title}</p>
 }
 
 function PropertiesComponent({
