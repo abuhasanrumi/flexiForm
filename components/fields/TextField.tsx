@@ -122,7 +122,7 @@ function FormComponent({
 
   const { label, required, placeholder, helperText } = element.extraAttributes
   return (
-    <div className='flex flex-col gap-2 w-full shadow-sm hover:shadow-md transition-shadow'>
+    <div className='flex flex-col gap-2 w-full transition-shadow'>
       <Label
         className={cn(
           'text-base font-medium text-[#202124]',

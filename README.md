@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 📝 FlexiForm
 
-## Getting Started
+FlexiForm is a clean and easy-to-use form builder built with modern web tools. It lets users create, customize, and manage forms through a simple drag-and-drop interface. Whether you're collecting feedback, registrations, or survey data, FlexiForm helps you get started quickly with a responsive and polished experience.
 
-First, run the development server:
+---
+
+## 🌟 Features
+
+- **Drag & Drop Builder** – Easily arrange form fields just the way you want
+- **Live Preview** – See changes in real time as you build your form
+- **Field Types Supported**:
+
+  - Text, Title, Paragraph, Number
+  - Dropdowns with options
+  - Checkboxes with custom labels
+  - Date pickers, spacers, and separators
+
+- **Form Management**:
+
+  - Create, edit, publish, and delete forms
+  - View and export responses
+
+- **Customization Options**:
+
+  - Validation rules per field
+  - Custom error messages
+  - Conditional visibility
+
+- **Sharing**:
+
+  - Share forms via unique links
+  - Control who can access
+
+- **User Experience**:
+
+  - Dark mode available
+  - Fully responsive on all devices
+
+- **Authentication & Security**:
+  - Sign-in support with Clerk
+  - Secure submission handling
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14 with App Router
+- **Styling**: Tailwind CSS + Shadcn UI
+- **Database**: Prisma with PostgreSQL
+- **Authentication**: Clerk
+- **Form Builder**: DND Kit for drag-and-drop functionality
+- **State Management**: React Context API
+- **Icons**: Lucide React + React Icons
+- **UI Components**: Custom components with Radix UI primitives
+
+## 📦 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/flexiform.git
+cd flexiform
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up environment variables:
+
+```env
+DATABASE_URL="your-database-url"
+CLERK_SECRET_KEY="your-clerk-secret"
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your-clerk-publishable-key"
+```
+
+4. Run database migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+5. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+├── app/                 # Next.js app router pages
+├── components/          # React components
+│   ├── fields/         # Form field components
+│   ├── ui/            # UI components
+│   └── hooks/         # Custom React hooks
+├── prisma/             # Database schema and migrations
+├── public/             # Static assets
+└── schemas/            # Validation schemas
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👨‍💻 Author
 
-## Learn More
+Abu Hasan Rumi
 
-To learn more about Next.js, take a look at the following resources:
+- Portfolio: [itsrumi.com](https://itsrumi.com)
+- GitHub: [@abuhasanrumi](https://github.com/abuhasanrumi)
+- LinkedIn: [Abu Hasan Rumi](https://www.linkedin.com/in/abu-hasan-rumi/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Deploy on Vercel
+## 🏆 Badges
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-blue)
+![Prisma](https://img.shields.io/badge/Prisma-5-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)

@@ -63,22 +63,38 @@ function FormSubmitComponent({
 
   if (submitted)
     return (
-      <div className='flex justify-center w-full h-full items-center p-8'>
-        <div className='max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-xl shadow-blue-700 rounded'>
-          <h1 className='text-2xl font-bold text-center'>
+      <div className='flex items-center justify-center w-full h-full p-6 sm:p-8 bg-accent/50'>
+        <div className='w-full max-w-xl bg-background border border-border shadow-md rounded-xl p-6 sm:p-10 text-center space-y-4'>
+          <div className='mx-auto w-16 h-16 rounded-full bg-green-100 flex items-center justify-center'>
+            <svg
+              className='w-8 h-8 text-green-600'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              viewBox='0 0 24 24'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M5 13l4 4L19 7'
+              />
+            </svg>
+          </div>
+
+          <h1 className='text-2xl font-semibold text-foreground'>
             Form Submitted Successfully!
           </h1>
-          <p className='text-muted-foreground text-center'>
-            Thanks for submitting the form. You can close this page now.
+          <p className='text-muted-foreground'>
+            Thanks for submitting the form. You can safely close this page now.
           </p>
         </div>
       </div>
     )
+
   return (
-    <div className='flex justify-center w-full h-full items-center p-8'>
+    <div className='flex justify-center items-center w-full h-full p-4 sm:p-8 bg-accent/30'>
       <div
         key={renderKey}
-        className='max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-xl shadow-blue-700 rounded'>
+        className='w-full max-w-2xl bg-background border border-border rounded-xl px-6 py-8 sm:px-10 sm:py-10 overflow-y-auto flex flex-col gap-6'>
         {content.map((element) => {
           const FormElement = FormElements[element.type].formComponent
           return (
@@ -91,19 +107,21 @@ function FormSubmitComponent({
             />
           )
         })}
+
         <Button
-          className='mt-8'
+          className='mt-6 self-end w-full sm:w-auto transition-colors'
           onClick={() => {
             startTransition(submitForm)
           }}
           disabled={pending}>
-          {!pending && (
-            <>
-              <HiCursorClick className='mr-2' />
+          {!pending ? (
+            <span className='flex items-center gap-2'>
+              <HiCursorClick />
               Submit
-            </>
+            </span>
+          ) : (
+            <ImSpinner2 className='animate-spin text-lg' />
           )}
-          {pending && <ImSpinner2 className='animate-spin' />}
         </Button>
       </div>
     </div>

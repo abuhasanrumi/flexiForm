@@ -125,7 +125,7 @@ function FormComponent({
   const { label, required, helperText } = element.extraAttributes
   const id = `checkbox-${element.id}`
   return (
-    <div className='flex flex-col gap-2 w-full shadow-sm hover:shadow-md transition-shadow'>
+    <div className='flex flex-col gap-2 w-full transition-shadow'>
       <div className='flex items-start space-x-3'>
         <Checkbox
           id={id}
