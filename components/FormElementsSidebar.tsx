@@ -4,29 +4,44 @@ import { Separator } from './ui/separator'
 
 function FormElementsSidebar() {
   return (
-    <div>
-      <p className='text-sm text-foreground/70'>Drag and drop elements</p>
-      <Separator className='my-2' />
-
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center'>
-        <p className='text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start'>
-          Layout Elements
+    <div className='space-y-8 text-zinc-800 dark:text-zinc-100'>
+      <div>
+        <p className='text-lg font-semibold mb-2'>Add elements</p>
+        <p className='text-sm text-zinc-500 dark:text-zinc-400 mb-6'>
+          Drag and drop or click to add elements to your form
         </p>
-        <SidebarBtnElement formElement={FormElements.TitleField} />
-        <SidebarBtnElement formElement={FormElements.SubtitleField} />
-        <SidebarBtnElement formElement={FormElements.ParagraphField} />
-        <SidebarBtnElement formElement={FormElements.SeparatorField} />
-        <SidebarBtnElement formElement={FormElements.SpacerField} />
+        <Separator className='mb-6 bg-zinc-200 dark:bg-zinc-700' />
+      </div>
 
-        <p className='text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start'>
-          Form Elements
-        </p>
-        <SidebarBtnElement formElement={FormElements.TextField} />
-        <SidebarBtnElement formElement={FormElements.NumberField} />
-        <SidebarBtnElement formElement={FormElements.TextareaField} />
-        <SidebarBtnElement formElement={FormElements.DateField} />
-        <SidebarBtnElement formElement={FormElements.SelectField} />
-        <SidebarBtnElement formElement={FormElements.CheckboxField} />
+      <div className='space-y-6'>
+        {/* Layout Elements Section */}
+        <div>
+          <p className='text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-3'>
+            Layout elements
+          </p>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+            <SidebarBtnElement formElement={FormElements.TitleField} />
+            <SidebarBtnElement formElement={FormElements.SubtitleField} />
+            <SidebarBtnElement formElement={FormElements.ParagraphField} />
+            <SidebarBtnElement formElement={FormElements.SeparatorField} />
+            <SidebarBtnElement formElement={FormElements.SpacerField} />
+          </div>
+        </div>
+
+        {/* Form Elements Section */}
+        <div>
+          <p className='text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-3'>
+            Form elements
+          </p>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+            <SidebarBtnElement formElement={FormElements.TextField} />
+            <SidebarBtnElement formElement={FormElements.NumberField} />
+            <SidebarBtnElement formElement={FormElements.TextareaField} />
+            <SidebarBtnElement formElement={FormElements.DateField} />
+            <SidebarBtnElement formElement={FormElements.SelectField} />
+            <SidebarBtnElement formElement={FormElements.CheckboxField} />
+          </div>
+        </div>
       </div>
     </div>
   )
