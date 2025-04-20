@@ -82,14 +82,20 @@ function DesignerComponent({
   const element = elementInstance as CustomInstance
   const { label, required, placeholder, helperText } = element.extraAttributes
   return (
-    <div className='flex flex-col gap-2 w-full'>
-      <Label>
+    <div className='flex flex-col gap-2 w-full shadow-sm'>
+      <Label className='text-base font-medium text-[#202124]'>
         {label}
-        {required && '*'}
+        {required && <span className='text-[#d93025] ml-1'>*</span>}
       </Label>
-      <Input readOnly disabled type='number' placeholder={placeholder} />
+      <Input
+        readOnly
+        disabled
+        type='number'
+        placeholder={placeholder}
+        className='bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 focus-visible:border-[#673ab7] text-[#202124] px-0 h-9 placeholder:text-zinc-400'
+      />
       {helperText && (
-        <p className='text-muted-foreground text-[0.8rem]'>{helperText}</p>
+        <p className='text-[#5f6368] text-sm mt-1.5'>{helperText}</p>
       )}
     </div>
   )
@@ -117,14 +123,21 @@ function FormComponent({
 
   const { label, required, placeholder, helperText } = element.extraAttributes
   return (
-    <div className='flex flex-col gap-2 w-full'>
-      <Label className={cn(error && 'text-red-500')}>
+    <div className='flex flex-col gap-2 w-full shadow-sm hover:shadow-md transition-shadow'>
+      <Label
+        className={cn(
+          'text-base font-medium text-[#202124]',
+          error && 'text-[#d93025]'
+        )}>
         {label}
-        {required && '*'}
+        {required && <span className='text-[#d93025] ml-1'>*</span>}
       </Label>
       <Input
         type='number'
-        className={cn(error && 'border-red-500')}
+        className={cn(
+          'bg-transparent border-b border-t-0 border-x-0 rounded-none focus-visible:ring-0 focus-visible:border-[#673ab7] text-[#202124] px-0 h-9 placeholder:text-zinc-400',
+          error && 'border-[#d93025] focus-visible:border-[#d93025]'
+        )}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
@@ -139,8 +152,8 @@ function FormComponent({
       {helperText && (
         <p
           className={cn(
-            'text-muted-foreground text-[0.8rem]',
-            error && 'text-red-500'
+            'text-sm text-[#5f6368] mt-1.5',
+            error && 'text-[#d93025]'
           )}>
           {helperText}
         </p>
